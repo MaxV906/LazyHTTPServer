@@ -44,6 +44,6 @@ cd target/debug
 
 Or if you wish, you can copy it to your bin directory
 #+begin_src sh
-sudo cp LazyHTTPServer /bin
+sudo cp LazyHTTPServer /usr/bin
 #+end_src
 
