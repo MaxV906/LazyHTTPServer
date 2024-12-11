@@ -43,8 +43,6 @@ fn didnt_feel_like_it(mut stream: TcpStream) {
 
     res.push_str("<h1> Error 404: Didn't feel like it </h1> <h3> I didn't feel like sending anything. Sue me </h3>");
 
-    //println!("Sending:\n\n{}", res);
-
     let _ = stream.write(res.as_bytes());
 }
 
@@ -66,16 +64,21 @@ fn handle_client(mut stream: TcpStream) {
         Ok(files) => {
             let mut rng = thread_rng();
             let html_files: Vec<_> = files.into_iter().filter(|f| f.file_name().and_then(|name| name.to_str()).map(|name| name.ends_with(".html")).unwrap()).collect();
-            let random_file = html_files.choose(&mut rng).unwrap();
+            if html_files.len() == 0 {
+                println!("Add some files, dickhead.");
+                res.push_str("The dumbass who made this site forgot to put some files here...");
+            } else {
+                let random_file = html_files.choose(&mut rng).unwrap();
 
-            let contents = match fs::read_to_string(random_file) {
-                Ok(contents) => contents,
-                Err(_) => "I didn't feel like reading your file".to_string()
-            };
+                let contents = match fs::read_to_string(random_file) {
+                    Ok(contents) => contents,
+                    Err(_) => "I didn't feel like reading your file".to_string()
+                };
 
-            res.push_str(&contents);
-            
-            //println!("Sending:\n\n{}", res);
+                res.push_str(&contents);
+
+
+            }
 
             let _ = stream.write(res.as_bytes());
 
