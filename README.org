@@ -1,0 +1,49 @@
+* LazyHTTPServer
+
+This is a lazy http server written it rust. It only sends webpages if it feels like it, and if it does, it doesn't regard your requests and just sends anything it wants.
+Some would say that my software is buggy/incomplete, but this is a *feature*, not a *bug*. If you want a functional webserver, write it yourself, dickhead.
+Donations are welcome, btw.
+
+** Features
+
+*** Serves only html files
+
+It only serves html files. Your css better be in your html file, because otherwise it's not serving it. It won't serve images or anything else. If you want to display images on your webpage, host it elsewhere.
+
+*** Doesn't read your request. Embrace the chaos
+
+It refuses to read your requests. 66% of the time you will get a "Error 404: Didn't feel like it" page. As you know, 404 is usually the error code for file not found, but in this server's case, it just didn't feel like fetching a file for you.
+If it feels generous, it will serve you a random html file from your directory.
+
+*** Gets files from your current directory
+
+It doesn't have a specific folder where it's supposed to hold your html files, so it will fetch the files from your current working directory.
+
+** Installation
+
+Cargo is required. (Obviously..)
+
+Start by cloning the repository
+#+begin_src sh
+git clone https://github.com/MaxV906/LazyHTTPServer.git
+#+end_src
+
+Then build it with cargo
+#+begin_src sh
+cd LazyHTTPServer
+cargo build
+#+end_src
+
+** Usage
+
+The binary will be in target/debug directory. You can execute the binary there. It takes a ip address and port to bind the listener to.
+#+begin_src sh
+cd target/debug
+./LazyHTTPServer 0.0.0.0 8080
+#+end_src
+
+Or if you wish, you can copy it to your bin directory
+#+begin_src sh
+sudo cp LazyHTTPServer /bin
+#+end_src
+
