@@ -37,7 +37,7 @@ fn didnt_feel_like_it(mut stream: TcpStream) {
 
     let _ = String::from_utf8_lossy(&buff);
 
-    let mut res = String::from("HTTP/1.1 404 Not Founn");
+    let mut res = String::from("HTTP/1.1 404 Not Found");
     res.push_str("Server: LazyHTTPServer\n");
     res.push_str("Content-Type: text/html;\n\n");   
 
